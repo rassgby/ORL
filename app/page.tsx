@@ -554,7 +554,7 @@ export default function Home() {
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mt-8 md:mt-12">
                 {[
                   {
-                    name: "Dr. Martin Dupont",
+                    name: "Dr. Aminata Fall",
                     role: "ORL, Hôpital Central",
                     avatar: "DM",
                     rating: 5,
@@ -562,7 +562,7 @@ export default function Home() {
                       "Cette plateforme a révolutionné ma pratique. Je peux désormais analyser rapidement les cas et offrir un diagnostic plus précis à mes patients.",
                   },
                   {
-                    name: "Sophie Martin",
+                    name: "Alpha Mendy",
                     role: "Patiente",
                     avatar: "SM",
                     rating: 5,
@@ -570,7 +570,7 @@ export default function Home() {
                       "Grâce à MediScan ORL, j'ai pu obtenir un diagnostic rapide pour mon problème d'audition. Le processus était simple et les résultats très précis.",
                   },
                   {
-                    name: "Dr. Thomas Bernard",
+                    name: "Dr. Ibrahima Gueye",
                     role: "Audiologiste",
                     avatar: "TB",
                     rating: 4,
