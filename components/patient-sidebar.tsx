@@ -1,0 +1,121 @@
+"use client"
+
+import Link from "next/link"
+import Image from "next/image"
+import { Home, Calendar, FileText, MessageSquare, Settings, User, LogOut } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+
+interface PatientSidebarProps {
+  className?: string
+}
+
+export function PatientSidebar({ className }: PatientSidebarProps) {
+  const pathname = usePathname()
+
+  const isActive = (path: string) => {
+    return pathname === path || pathname?.startsWith(path)
+  }
+
+  const navItems = [
+    {
+      title: "Tableau de bord",
+      href: "/dashboard/patient",
+      icon: Home,
+      active: pathname === "/dashboard/patient",
+    },
+    {
+      title: "Détection",
+      href: "/dashboard/patient/detection",
+      icon: FileText,
+      active: isActive("/dashboard/patient/detection"),
+    },
+    {
+      title: "Rendez-vous",
+      href: "/dashboard/patient/appointments",
+      icon: Calendar,
+      active: isActive("/dashboard/patient/appointments"),
+    },
+    {
+      title: "Messages",
+      href: "/dashboard/patient/messages",
+      icon: MessageSquare,
+      active: isActive("/dashboard/patient/messages"),
+      badge: "5",
+    },
+    {
+      title: "Historique",
+      href: "/dashboard/patient/history",
+      icon: FileText,
+      active: isActive("/dashboard/patient/history"),
+    },
+  ]
+
+  const bottomNavItems = [
+    {
+      title: "Profil",
+      href: "/dashboard/patient/profile",
+      icon: User,
+      active: isActive("/dashboard/patient/profile"),
+    },
+    {
+      title: "Paramètres",
+      href: "/dashboard/patient/settings",
+      icon: Settings,
+      active: isActive("/dashboard/patient/settings"),
+    },
+  ]
+
+  return (
+    <div className={cn("flex h-full w-64 flex-col bg-white dark:bg-gray-950 border-r", className)}>
+      <div className="flex h-14 items-center border-b px-4">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <div className="bg-orl-blue-600 dark:bg-orl-blue-500 rounded-lg p-1">
+            <Image src="/placeholder.svg?height=22&width=22" width={22} height={22} alt="Logo" className="rounded-lg" />
+          </div>
+          <span className="text-orl-blue-700 dark:text-orl-blue-400">MediScan ORL</span>
+        </Link>
+      </div>
+      <div className="flex-1 overflow-auto py-2">
+        <nav className="grid items-start px-2 text-sm font-medium">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn("nav-link", item.active ? "nav-link-active" : "nav-link-inactive")}
+            >
+              <item.icon className="h-4 w-4" />
+              {item.title}
+              {item.badge && (
+                <div className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-orl-blue-100 dark:bg-orl-blue-900/50 text-xs text-orl-blue-600 dark:text-orl-blue-400">
+                  {item.badge}
+                </div>
+              )}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <div className="mt-auto border-t p-4">
+        <div className="flex flex-col gap-1 py-2">
+          {bottomNavItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn("nav-link", item.active ? "nav-link-active" : "nav-link-inactive")}
+            >
+              <item.icon className="h-4 w-4" />
+              {item.title}
+            </Link>
+          ))}
+        </div>
+        <Link
+          href="/logout"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-red-600"
+        >
+          <LogOut className="h-4 w-4" />
+          Déconnexion
+        </Link>
+      </div>
+    </div>
+  )
+}
